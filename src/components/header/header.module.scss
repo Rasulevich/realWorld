@@ -1,0 +1,121 @@
+.header{
+    background: #FFFFFF;
+    height: 80px;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+}
+
+.header__title{
+    width: 147px;
+    height: 56px;
+    margin-left: 22px;
+    margin-top: 20px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+    color: rgba(0, 0, 0, 0.85);
+
+}
+
+.signIn {
+    width: 84px;
+    height: 35px;
+    margin-right: 20px;
+    margin-left: auto;
+}
+
+.signUp {  
+    width: 109px;
+    height: 51px;
+    margin-right: 20px;
+    margin-top: 14px;
+}
+
+.buttonSignIn {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+    color: rgba(0, 0, 0, 0.85);
+    background: #FFFFFF;
+    border: 0px;
+}
+
+.buttonSignUp {
+    border: 1px solid #52C41A;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background: #FFFFFF;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+    color: #52C41A;
+}
+
+.profile {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-right: 20px;
+}
+ .profileName {
+    margin-right: 10px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+    margin-top: -4px;
+ }
+
+ .buttonCreateArticle{
+    color: #52C41A;
+    border: 1px solid #F5222D;
+    border-radius: 4px;
+    margin-left: -50px;
+    width: 110px;
+    margin-right: 36px;
+    height: 31.1px;
+    background-color: #FFFFFF;
+}
+
+.createArticle {
+    width: 84px;
+    height: 35px;
+    margin-right: 20px;
+    margin-left: auto;
+}
+
+.logOut{
+    width: 109px;
+    height: 51px;
+    margin-right: 20px;
+    margin-top: 14px;
+}
+
+.buttonLogOut {
+    color: black;
+    border: 1px solid black;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background: #FFFFFF;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.image {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    margin-top: -10px;
+}

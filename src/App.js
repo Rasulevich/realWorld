@@ -1,24 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable no-console */
+/* eslint-disable import/no-named-as-default-member */
+import React from 'react';
+import {BrowserRouter, Route} from 'react-router-dom';
+import { useState } from 'react/cjs/react.development';
+import Header from './components/header/header';
+import ArticleList from './components/articleList/articleList';
+import OpenArticle from './components/openArticle/openArticle';
+import SignIn from './components/signIn/signIn';
+import SignUp from './components/signUp/signUp';
+import Profile from './components/profile/profile';
+import CreateArticle from './components/createArticle/createArticle';
+import EditArticle from './components/editArticle/editArticle';
+import  './App.css';
 
 function App() {
+  const [updateHeader, setUsername] = useState(false);
+
+  const updateUsername = () => {
+    console.log('update')
+    setUsername(!updateHeader)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className='App'>
+        <Header updateHeader={updateHeader} />
+        <Route path="/articles"  exact render={() =><ArticleList/> } />
+        <Route path="/article/:slug?" exact render={({match})=>{
+          const {slug} = match.params
+          console.log(slug)
+
+          return <OpenArticle slug={slug}/>
+        } }/>
+        <Route path="/article/:slug?/edit" render={({match})=>{
+          const {slug} = match.params
+          console.log(slug)
+
+          return <EditArticle slug={slug}/>
+        } }/>
+        <Route path="/sign-in" render={() =><SignIn updateUsername={updateUsername}/> }/>
+        <Route path="/sign-up" component={SignUp}/>
+        <Route path="/profile" render={() =><Profile updateUsername={updateUsername}/> }/>
+        <Route path="/new-article" component={CreateArticle}/>
+
+
+      </div>
+    </BrowserRouter>
+    
   );
 }
 
