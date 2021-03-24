@@ -1,9 +1,10 @@
 import React from 'react';
 import { withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import likeImage from '../../img/Vector.svg';
 import style from './article.module.scss';
 
-const Article = ({title, date, description, name, image, history, slug, tagList}) => {
+const Article = ({title, date, description, name, image, history, slug, tagList, favoritesCount}) => {
     
     const onClick = () => {
         history.push(`/article/${slug}`)
@@ -11,11 +12,21 @@ const Article = ({title, date, description, name, image, history, slug, tagList}
 
     const dateFull = new Date(date);
     const newDate = dateFull.toUTCString().slice(4,16);
-
+    const imageCheck = () => {
+        if (image) {
+            return image
+        }
+        return "https://static.productionready.io/images/smiley-cyrus.jpg";
+    } 
+    
     return (
         <div className={style.main}>
              <div className={style.article}>
-                <div className={style.article__header} onClick={onClick} onKeyDown={onClick} aria-hidden="true"> {title}</div>
+                <div className={style.article__header} onClick={onClick} onKeyDown={onClick} aria-hidden="true"> {title} 
+                    <div type='button' className={style.likeButton}>
+                        <img src={likeImage} alt='like'/> {favoritesCount !== 0 ? favoritesCount : false}
+                    </div> 
+                </div>
                 <div className={style.tagList}>
                     {tagList.map((tag) => <div className={style.article__tags}>{tag}</div>)}
                 </div>                    
@@ -23,10 +34,10 @@ const Article = ({title, date, description, name, image, history, slug, tagList}
             </div>
              <div className={style.profile}>
                  <div className={style.profile__info}>
-                     <div className={style.profile__name}>{name}</div>
+                     <div className={style.profile__name}>{name.slice(0,9)}</div>
                      <div className={style.profile__date}> {newDate}</div>
                  </div>
-                 <img className={style.image} src={image} alt='profile img'/>
+                 <img className={style.image} src={imageCheck()} alt='profile img'/>
              </div>
         </div>           
         )  
@@ -41,6 +52,7 @@ Article.propTypes = {
     history: PropTypes.string,
     slug: PropTypes.string,
     tagList: PropTypes.arrayOf,
+    favoritesCount: PropTypes.string
 }
 
 Article.defaultProps = {
@@ -52,6 +64,7 @@ Article.defaultProps = {
     history:'',
     slug:'',
     tagList:[],
+    favoritesCount:''
 }
 
 export default withRouter(Article);

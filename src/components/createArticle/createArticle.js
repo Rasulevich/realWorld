@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
+import {Redirect} from 'react-router-dom';
 import ArticleService from '../service/service';
 import style from './createArticle.module.scss';
 
@@ -8,6 +9,8 @@ const CreateArticle = () => {
     const articles = new ArticleService();
 
     const[addTagInput, setAddTagInput] = useState(1);
+    // eslint-disable-next-line no-unused-vars
+    const [created, setCreated] = useState(false);
 
     const {register, handleSubmit, errors} = useForm();
 
@@ -20,8 +23,10 @@ const CreateArticle = () => {
     }
 
     const onSubmit = (data) => {
-        articles.postArticle(data.title, data.description, data.body, data.tags)    
+        articles.postArticle(data.title, data.description, data.body, data.tags).then(() => setCreated(true) )    
     } 
+
+    if (created) { return  <Redirect to='/articles'/> }
 
     return (
         <div className={style.main}>

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import PropTypes from 'prop-types';
+import {Redirect} from 'react-router-dom';
 import ArticleService from '../service/service';
 import style from './profile.module.scss'
 
@@ -9,12 +10,17 @@ const Profile = ({updateUsername}) => {
     const profile = new ArticleService();
 
     const {register, handleSubmit, errors} = useForm();
+    const [loginned, setLogin] = useState(false);
+
     
     const onSubmit = (data) => {
         profile.editProfile(data.username, data.email, data.password, data.image)
+        localStorage.setItem('username', data.username)
         updateUsername()
+        setLogin(true)
     } 
-   
+    if (loginned) { return  <Redirect to='/articles'/> }
+
     return (
         <div className={style.signIn}>
             <p className={style.title}>Edit Profile</p>

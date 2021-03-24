@@ -28,6 +28,7 @@ const SignIn = ({ updateUsername}) => {
                     return
                 }
                 localStorage.setItem('token', res.user.token)
+                localStorage.setItem('username', res.user.username)
                 setLogin(true) 
                 updateUsername()
              })

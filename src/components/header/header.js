@@ -9,12 +9,12 @@ const Header = ({updateHeader}) => {
 
     const user = new ArticleService;
 
-    const image = "https://static.productionready.io/images/smiley-cyrus.jpg"
+    const image = "https://static.productionready.io/images/smiley-cyrus.jpg";
 
     const[name, setName] = useState('');
     const[avatar, setAvatar] = useState(image);
     const[loginned, setLoginned] = useState(false);
-    const[isMounted, setIsMounted] = useState(false)
+    // const[isMounted, setIsMounted] = useState(true)
   
     const logout = () => {
         localStorage.clear()
@@ -23,7 +23,6 @@ const Header = ({updateHeader}) => {
         }
 
     useEffect(() => {
-        if (isMounted) {
             user.getCurrentUser().then((res) => {
                 console.log(res)
                 if(res.user.username) {
@@ -36,8 +35,6 @@ const Header = ({updateHeader}) => {
                     setAvatar(res.user.image)
                 }
             })
-        }
-        setIsMounted(true)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[updateHeader])
 

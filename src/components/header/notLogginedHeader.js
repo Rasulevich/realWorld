@@ -6,7 +6,7 @@ import style from './header.module.scss';
 const NotLogginedHeader = ({name, avatar}) => (
         <div className={style.header}>
 
-                        <Link to='articles'>
+                        <Link to='/articles'>
                             <div className={style.header__title}> Realworld Blog</div>
                         </Link>
 

@@ -1,27 +1,23 @@
-/* eslint-disable consistent-return */
-/* eslint-disable no-console */
+import ApiService from './apiService';
+
 export default class ArticleService {
+
+  apiService = new ApiService ();
+
+  baseUrl = `https://conduit.productionready.io/api/`;
 
   token = localStorage.getItem('token')
 
     async getArticleList(page) {
-        const res = await fetch (`https://conduit.productionready.io/api/articles?offset=${page}`)
-        if (!res.ok) {
-            throw new Error(`Could not fetch ` + 
-              `, received ${res.status}`)
-          }
-        const result = await res.json()
-        return result
+
+      return this.apiService.fetch(`${this.baseUrl}articles?offset=${page}`)
+
     }
 
     async getArticle(slug) {
-        const res = await fetch (`https://conduit.productionready.io/api/articles/${slug}`);
-        if (!res.ok) {
-            throw new Error(`Could not fetch ` + 
-              `, received ${res.status}`)
-          }
-        const result = await res.json()
-        return result
+     
+      return this.apiService.fetch(`${this.baseUrl}articles/${slug}`)
+
     }
 
     async registration(username, email, password){
@@ -31,14 +27,9 @@ export default class ArticleService {
             "password": password
             }  
         }
+        const method = 'POST'
+        await fetch(`${this.baseUrl}users`, this.apiService.postData(method, data));    
 
-        await fetch(`https://conduit.productionready.io/api/users`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify(data)
-        });
     }
 
     async authentication(email, password){
@@ -47,18 +38,9 @@ export default class ArticleService {
             "password": password
             }  
         }
+        const method = 'POST'
+        await fetch(`${this.baseUrl}users/login`, this.apiService.postData(method,data));    
 
-        const res = await fetch(`https://conduit.productionready.io/api/users/login`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify(data)
-        });
-        console.log(res)
-        const result = await res.json()
-        console.log(result)
-        return result
     }
 
     async getCurrentUser() {
@@ -83,17 +65,10 @@ export default class ArticleService {
                 }
       }
 
-      const res = await fetch(`https://conduit.productionready.io/api/user`, {
-          method: 'PUT',
-          "headers": {
-            'Content-Type': 'application/json;charset=utf-8',
-            "Authorization": `Token ${this.token}`
-          },
-          body: JSON.stringify(data)
-        });
-        const result = await res.json()
-        console.log(result)
-        return result
+      const method = 'PUT'
+
+      await fetch(`${this.baseUrl}user`, this.apiService.postData(method,data,this.token));    
+
     }
 
     async postArticle(title, description, body,tags) {
@@ -106,18 +81,11 @@ export default class ArticleService {
         }
       }
 
-      const res = await fetch(`https://conduit.productionready.io/api/articles`, {
-          method: 'POST',
-          "headers": {
-            'Content-Type': 'application/json;charset=utf-8',
-            "Authorization": `Token ${this.token}`
-          },
-          body: JSON.stringify(data)
-        });
-        const result = await res.json()
-        console.log(result)
-        return result
-    }
+      const method = 'POST'
+
+      await fetch(`${this.baseUrl}articles`, this.apiService.postData(method,data,this.token));    
+     
+      }
 
     async editArticle(slug,title,description,body,tags) {
       const data = { "article": 
@@ -129,32 +97,32 @@ export default class ArticleService {
         }
       }
 
-      const res = await fetch(`https://conduit.productionready.io/api/articles/${slug}`, {
-          method: 'PUT',
-          "headers": {
-            'Content-Type': 'application/json;charset=utf-8',
-            "Authorization": `Token ${this.token}`
-          },
-          body: JSON.stringify(data)
-        });
-        const result = await res.json()
-        return result
+      const method = 'PUT'
+
+      await fetch(`${this.baseUrl}articles/${slug}`, this.apiService.postData(method,data,this.token));    
+
     }
 
     async deleteArticle(slug) {
-      const res = await fetch(`https://conduit.productionready.io/api/articles/${slug}`, {
-        method: 'DELETE',
-        "headers": {
-          'Content-Type': 'application/json;charset=utf-8',
-          "Authorization": `Token ${this.token}`
-        },
-        body: JSON.stringify()
-      });      
-      if (!res.ok) {
-          throw new Error(`Could not fetch ` + 
-            `, received ${res.status}`)
-        }
-      const result = await res.json()
-      return result
-  }
+      
+      const method = 'DELETE'
+
+      await fetch(`${this.baseUrl}articles/${slug}`, this.apiService.postData(method, null, this.token));    
+   
+    }
+
+    async postLike(slug) {
+
+      const method = 'POST'
+
+      await fetch(`${this.baseUrl}articles/${slug}/favorite`, this.apiService.postData(method,null,this.token));    
+
+      }  
+      
+    async deleteLike(slug) {
+      const method = 'DELETE'
+
+      await fetch(`${this.baseUrl}articles/${slug}/favorite`, this.apiService.postData(method,null,this.token));    
+    }   
+
 }

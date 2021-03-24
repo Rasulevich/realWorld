@@ -24,6 +24,7 @@
     font-size: 20px;
     line-height: 28px;
     color: #1890FF;
+    display: flex;
 }
 
 .article__tags {
@@ -110,5 +111,10 @@
     display: flex;
     margin-top: 8px;
     margin-left: 10px;
+}
+.likeButton {
+    background: #FFFFFF;
+    border: 0px;
+    margin-left: 6px;
 }
 

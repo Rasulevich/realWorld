@@ -44,6 +44,7 @@ import style from './articleList.module.scss'
                     date={item.createdAt} 
                     tagList={item.tagList}
                     slug={item.slug} 
+                    favoritesCount={item.favoritesCount}
                     />
              </div>
     )

@@ -1,30 +1,27 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import {Redirect} from 'react-router-dom';
 import ArticleService from '../service/service';
 import style from './modal.module.scss'
 
-const Modal = ({deleteBtnClicked, slug}) => {
+const Modal = ({deleteBtnClicked, slug, setDeleteBtnClicked}) => {
 
     const article = new ArticleService;
+    const [deleted, setDeleted] = useState(false);
 
-    const [closeModal, setCloseModal] = useState(false);
-    
     const deleteArticle = () => {
-        article.deleteArticle(slug)
+        article.deleteArticle(slug).then(() => setDeleted(true));
     }
 
     const notDelete = () => { 
-        setCloseModal(true)
+        setDeleteBtnClicked(false)
     }
     
-    if (!deleteBtnClicked ) {
-        return null
-    }
+    if (!deleteBtnClicked ) { return null }
 
-    if (closeModal) {
-        return null
-    }
-
+    if (deleted) { return  <Redirect to='/articles'/> }
+    
     return (
         <div className={style.modal}>
                         <p className={style.modal__text}>Are you sure to delete this article?</p>
@@ -41,11 +38,13 @@ const Modal = ({deleteBtnClicked, slug}) => {
 
 Modal.propTypes = {
     deleteBtnClicked:PropTypes.bool,
+    setDeleteBtnClicked:PropTypes.func,
     slug:PropTypes.string
 }
 
 Modal.defaultProps = {
     deleteBtnClicked:false,
+    setDeleteBtnClicked:(()=>{}),
     slug:''
 }
 

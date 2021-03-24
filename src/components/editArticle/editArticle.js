@@ -1,6 +1,6 @@
-/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import {useForm} from 'react-hook-form';
+import {Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ArticleService from '../service/service';
 import style from './editArticle.module.scss';
@@ -9,9 +9,10 @@ const EditArticle = ({slug}) => {
 
     const articles = new ArticleService();
 
-    const[addTagInput, setAddTagInput] = useState(0);
+    const[addTagInput, setAddTagInput] = useState(1);
     const[items, setItems] = useState([]);
-    const[itemsLoaded, setItemsLoaded] = useState(false)
+    const[itemsLoaded, setItemsLoaded] = useState(false);
+    const[edited, setEdited] = useState(false);
     
     useEffect(() => {
         articles.getArticle(slug).then((res)=> {
@@ -33,10 +34,15 @@ const EditArticle = ({slug}) => {
     const {register, handleSubmit, errors} = useForm();
     
     const onSubmit = (data) => {
-        articles.editArticle(slug,data.title, data.description, data.body, data.tags)    
+        let allTags = [...data.newTags]
+        // eslint-disable-next-line no-unused-expressions
+        data.tags ? allTags = [...data.newTags, ...data.tags] : false
+        articles.editArticle(slug,data.title, data.description, data.body, allTags).then(() => setEdited(true))    
     } 
 
     const tags = items.tagList
+
+    if (edited) { return  <Redirect to='/articles'/> }
 
     return (
         <div className={style.main}>
@@ -81,10 +87,16 @@ const EditArticle = ({slug}) => {
                     <label htmlFor='title' className={style.title__label}>Tags</label>
 
                     <div className={style.input__box}>
-                        {itemsLoaded ? tags.map((el) => <input placeholder='Tags' name='tags' type='text' defaultValue={el}
-                                            className={style.tags__input} ref={register()} key={Date.now() * Math.random()}/>) : false}
-                        {[...Array(addTagInput)].map(() => <input placeholder='Tags' name='tags' type='text' 
-                                                     className={style.tags__input} ref={register()} key={Date.now() * Math.random()}/>)}
+                        { itemsLoaded ? tags.map((el,index) => {
+                            const name = `tags[${index}]`
+                            return <input placeholder='Tags' name={name}  type='text' defaultValue={el}
+                                            className={style.tags__input} ref={register()} />}) : false
+                        }
+                        {[...Array(addTagInput)].map((el,index) => {
+                            const name = `newTags[${index}]`
+                            return <input placeholder='Tags' name={name} type='text' 
+                             className={style.tags__input} ref={register()} key={Date.now() * Math.random()}/>
+                        })}
                     </div>
 
                     <div className={style.tags__box}>
