@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { withRouter } from 'react-router-dom';
@@ -59,7 +60,7 @@ const OpenArticle = ({slug,history}) => {
                     </button>
                 </div>
                 <div className={style.tagList}>
-                    {tags.map((tag) => <div className={style.article__tags}>{tag}</div>)}
+                    {tags.map((tag,id) => <div className={style.article__tags} key={id}>{tag}</div>)}
                 </div>  
                 <div className={style.article__content}>{items.description} </div>
             </div>
@@ -90,7 +91,7 @@ const OpenArticle = ({slug,history}) => {
 
 OpenArticle.propTypes = {
     slug:PropTypes.string,
-    history:PropTypes.string
+    history:PropTypes.objectOf(PropTypes.any)
 }
 
 OpenArticle.defaultProps = {

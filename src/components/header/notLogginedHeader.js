@@ -19,7 +19,7 @@ const NotLogginedHeader = ({name, avatar}) => (
                             <img src={avatar} alt="profile img" className={style.image}/>
                         </Link>
 
-                        <Link to='/sign-up'  className={style.signUp}>
+                        <Link to='/sign-up' className={style.signUp}>
                             <button type='button' className={style.buttonSignUp}>Sign Up</button>
                         </Link>
 

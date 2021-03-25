@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -28,7 +29,7 @@ const Article = ({title, date, description, name, image, history, slug, tagList,
                     </div> 
                 </div>
                 <div className={style.tagList}>
-                    {tagList.map((tag) => <div className={style.article__tags}>{tag}</div>)}
+                    {tagList.map((tag,index) => <div className={style.article__tags} key={index}>{tag}</div>)}
                 </div>                    
                 <div className={style.article__content}>{description} </div>
             </div>
@@ -49,10 +50,10 @@ Article.propTypes = {
     description: PropTypes.string,
     name: PropTypes.string,
     image: PropTypes.string,
-    history: PropTypes.string,
+    history: PropTypes.objectOf(PropTypes.any),
     slug: PropTypes.string,
-    tagList: PropTypes.arrayOf,
-    favoritesCount: PropTypes.string
+    tagList: PropTypes.arrayOf(PropTypes.any),
+    favoritesCount: PropTypes.number
 }
 
 Article.defaultProps = {

@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-import { Alert } from 'antd';
-import 'antd/dist/antd.css';
 import {Link, Redirect} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import PropTypes from 'prop-types';
@@ -24,9 +22,8 @@ const SignIn = ({ updateUsername}) => {
     const onSubmit = (data) => {
         users.authentication(data.email, data.password)
              .then((res) => {
-                if(Object.prototype.hasOwnProperty.call(res, 'errors') || res === null) {
-                    return
-                }
+                if(res === null || res=== undefined) { return}
+                if(Object.prototype.hasOwnProperty.call(res, 'errors')) {return}
                 localStorage.setItem('token', res.user.token)
                 localStorage.setItem('username', res.user.username)
                 setLogin(true) 
@@ -66,7 +63,7 @@ const SignIn = ({ updateUsername}) => {
                 <button type='submit' className={style.loginButton}><span className={style.loginText}>Login</span></button>
                 
             </form>
-            <h6 className={style.text}>Dont have an account? <Link><span className={style.signUpButton}>Sign Up</span></Link></h6>
+            <h6 className={style.text}>Dont have an account? <Link to='sign-up'><span className={style.signUpButton}>Sign Up</span></Link></h6>
         </div>
     )
 }

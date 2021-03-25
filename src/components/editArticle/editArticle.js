@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from 'react';
 import {useForm} from 'react-hook-form';
 import {Redirect} from 'react-router-dom';
@@ -89,7 +90,7 @@ const EditArticle = ({slug}) => {
                     <div className={style.input__box}>
                         { itemsLoaded ? tags.map((el,index) => {
                             const name = `tags[${index}]`
-                            return <input placeholder='Tags' name={name}  type='text' defaultValue={el}
+                            return <input placeholder='Tags' name={name}  key={index} type='text' defaultValue={el}
                                             className={style.tags__input} ref={register()} />}) : false
                         }
                         {[...Array(addTagInput)].map((el,index) => {

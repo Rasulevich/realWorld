@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 import ArticleService from '../service/service';
@@ -14,7 +13,6 @@ const Header = ({updateHeader}) => {
     const[name, setName] = useState('');
     const[avatar, setAvatar] = useState(image);
     const[loginned, setLoginned] = useState(false);
-    // const[isMounted, setIsMounted] = useState(true)
   
     const logout = () => {
         localStorage.clear()
@@ -24,7 +22,6 @@ const Header = ({updateHeader}) => {
 
     useEffect(() => {
             user.getCurrentUser().then((res) => {
-                console.log(res)
                 if(res.user.username) {
                     setLoginned(true)
                 }
@@ -35,6 +32,7 @@ const Header = ({updateHeader}) => {
                     setAvatar(res.user.image)
                 }
             })
+            .catch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[updateHeader])
 
