@@ -10,7 +10,7 @@ import style from './openArticle.module.scss';
 
 const OpenArticle = ({slug,history}) => {
 
-    const article = new ArticleService;
+    const article = new ArticleService();
     const checkUsername = localStorage.getItem('username');
 
 
@@ -18,7 +18,8 @@ const OpenArticle = ({slug,history}) => {
     const [deleteBtnClicked, setDeleteBtnClicked] = useState(false);
     const [tags, setTags] = useState([]);
     const [showButtons, setShowbuttons] = useState(false);
-    const [liked, setLiked] = useState(false)
+    const [liked, setLiked] = useState(false);
+
     useEffect(() => {
         article.getArticle(slug)
             .then(res => {
@@ -50,6 +51,7 @@ const OpenArticle = ({slug,history}) => {
     const addLike = () => {
             article.postLike(slug).then(() =>setLiked(true))
     }
+    
     return (
         <div className={style.openedArticle}>
            <div className={style.main}>

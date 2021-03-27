@@ -6,14 +6,13 @@ import style from './header.module.scss';
 
 const Header = ({updateHeader}) => {
 
-    const user = new ArticleService;
+    const user = new ArticleService();
 
     const image = "https://static.productionready.io/images/smiley-cyrus.jpg";
 
     const[name, setName] = useState('');
     const[avatar, setAvatar] = useState(image);
     const[loginned, setLoginned] = useState(false);
-  
     const logout = () => {
         localStorage.clear()
         setLoginned(false)
@@ -22,6 +21,7 @@ const Header = ({updateHeader}) => {
 
     useEffect(() => {
             user.getCurrentUser().then((res) => {
+
                 if(res.user.username) {
                     setLoginned(true)
                 }

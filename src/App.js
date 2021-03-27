@@ -1,6 +1,5 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
-import { useState } from 'react/cjs/react.development';
 import Header from './components/header/header';
 import ArticleList from './components/articleList/articleList';
 import OpenArticle from './components/openArticle/openArticle';
@@ -31,9 +30,9 @@ const App = () => {
           const {slug} = match.params
           return <EditArticle slug={slug}/>
         } }/>
-        <Route path="/sign-in" render={() =><SignIn updateUsername={updateUsername}/> }/>
+        <Route path="/sign-in" render={() =><SignIn updateUsername={updateUsername}/>}/>
         <Route path="/sign-up" component={SignUp}/>
-        <Route path="/profile" render={() =><Profile updateUsername={updateUsername}/> }/>
+        <Route path="/profile" render={() =><Profile updateUsername={updateUsername}/>}/>
         <Route path="/new-article" component={CreateArticle}/>
       </div>
     </BrowserRouter>

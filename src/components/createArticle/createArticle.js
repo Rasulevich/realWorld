@@ -9,7 +9,6 @@ const CreateArticle = () => {
     const articles = new ArticleService();
 
     const[addTagInput, setAddTagInput] = useState(1);
-    // eslint-disable-next-line no-unused-vars
     const [created, setCreated] = useState(false);
 
     const {register, handleSubmit, errors} = useForm();

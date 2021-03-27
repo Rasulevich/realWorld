@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
@@ -7,7 +6,7 @@ import style from './modal.module.scss'
 
 const Modal = ({deleteBtnClicked, slug, setDeleteBtnClicked}) => {
 
-    const article = new ArticleService;
+    const article = new ArticleService();
     const [deleted, setDeleted] = useState(false);
 
     const deleteArticle = () => {

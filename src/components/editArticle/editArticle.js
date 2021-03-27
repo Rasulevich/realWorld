@@ -20,7 +20,6 @@ const EditArticle = ({slug}) => {
             setItems(res.article)
             setItemsLoaded(true)
         })
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[slug]) 
     

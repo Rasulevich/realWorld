@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 import React, { useState } from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
@@ -9,7 +7,7 @@ import style from './signIn.module.scss'
 
 const SignIn = ({ updateUsername}) => {
 
-    const users = new ArticleService;
+    const users = new ArticleService();
 
     const[loginned, setLogin] = useState(false);
     const[error, setError] = useState(false)

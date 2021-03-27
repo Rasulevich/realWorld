@@ -14,7 +14,7 @@ export default class ApiService {
         return result;
       };
 
-    postData (apiMethod, bodyData,token) {
+    postData (apiMethod, bodyData,token = null) {
         return {
              "method": apiMethod,
              "headers": {

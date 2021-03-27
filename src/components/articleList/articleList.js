@@ -12,7 +12,7 @@ import style from './articleList.module.scss'
     const [items, setItems] = useState([]);
     const [page, setPage] = useState(0);
     const [loader, setLoader] = useState(true);
-    const [error, setError] = useState(false)
+    const [error, setError] = useState(false);
 
     const pageChange = (event) => {
         setPage((event-1) * 20)
@@ -35,20 +35,21 @@ import style from './articleList.module.scss'
     }, [page])
 
      const elements = items.map(item => (
-             <div key={item.slug}>
-                <Article
-                    title = {item.title}
-                    name = {item.author.username}
-                    image={item.author.image}    
-                    description={item.description}
-                    date={item.createdAt} 
-                    tagList={item.tagList}
-                    slug={item.slug} 
-                    favoritesCount={item.favoritesCount}
-                    />
-             </div>
-    )
-    )
+                <div key={item.slug}>
+                    <Article
+                        title = {item.title}
+                        name = {item.author.username}
+                        image={item.author.image}    
+                        description={item.description}
+                        date={item.createdAt} 
+                        tagList={item.tagList}
+                        slug={item.slug} 
+                        favoritesCount={item.favoritesCount}
+                        />
+                </div>
+                )
+            )
+            
     if (loader) {return <div className={style.spinner}>  <Spin size='large'/> </div>}  
     
     if (error) {return <div className={style.spinner}> <Alert message="Something go wrong" type="success"/> </div>} 

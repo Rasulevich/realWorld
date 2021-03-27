@@ -13,6 +13,7 @@ const Article = ({title, date, description, name, image, history, slug, tagList,
 
     const dateFull = new Date(date);
     const newDate = dateFull.toUTCString().slice(4,16);
+    
     const imageCheck = () => {
         if (image) {
             return image

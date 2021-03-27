@@ -11,14 +11,15 @@ const Profile = ({updateUsername}) => {
 
     const {register, handleSubmit, errors} = useForm();
     const [loginned, setLogin] = useState(false);
-
-    
+ 
     const onSubmit = (data) => {
-        profile.editProfile(data.username, data.email, data.password, data.image)
-        localStorage.setItem('username', data.username)
-        updateUsername()
-        setLogin(true)
+        profile.editProfile(data.username, data.email, data.password, data.image).then(()=>{
+            localStorage.setItem('username', data.username)
+            updateUsername()
+            setLogin(true)
+        })   
     } 
+
     if (loginned) { return  <Redirect to='/articles'/> }
 
     return (
@@ -66,8 +67,7 @@ const Profile = ({updateUsername}) => {
                        name='image'
                        ref={register}
                        />
-                       
-                
+                                   
                 <button type='submit' className={style.loginButton}><span className={style.loginText}>Save</span></button>
 
             </form>

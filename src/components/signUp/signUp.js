@@ -6,7 +6,7 @@ import style from './signUp.module.scss';
 
 const SignUp = () => {
 
-    const users = new ArticleService;
+    const users = new ArticleService();
     const [loginned, setLogin] = useState(false);
 
     const {register, handleSubmit, errors, watch} = useForm();
