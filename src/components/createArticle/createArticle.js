@@ -9,7 +9,8 @@ const CreateArticle = () => {
     const articles = new ArticleService();
 
     const[addTagInput, setAddTagInput] = useState(1);
-    const [created, setCreated] = useState(false);
+    const[created, setCreated] = useState(false);
+    const[buttonDisable, setButtonDisable] = useState(false);
 
     const {register, handleSubmit, errors} = useForm();
 
@@ -22,7 +23,8 @@ const CreateArticle = () => {
     }
 
     const onSubmit = (data) => {
-        articles.postArticle(data.title, data.description, data.body, data.tags).then(() => setCreated(true) )    
+        setButtonDisable(true)
+        articles.postArticle(data.title, data.description, data.body, data.tags).then(() =>  setCreated(true) )    
     } 
 
     if (created) { return  <Redirect to='/articles'/> }
@@ -81,7 +83,7 @@ const CreateArticle = () => {
                        
                 </div>
             </form>
-            <button type='button' className={style.sendButton} onClick={handleSubmit(onSubmit)}><span className={style.buttonText} >Send</span></button>
+            <button type='button' disabled={buttonDisable} className={style.sendButton} onClick={handleSubmit(onSubmit)}><span className={style.buttonText} >Send</span></button>
 
         </div>
     )

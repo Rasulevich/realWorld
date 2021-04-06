@@ -14,10 +14,13 @@
     width: 700px;
 }
 
+.article__box {
+    display: flex;
+    padding-top: 10px;   
+}
 .article__header {
     height: 28px;
     margin-left: 16px;
-    padding-top: 10px;
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
@@ -116,5 +119,38 @@
     background: #FFFFFF;
     border: 0px;
     margin-left: 6px;
+    outline: none;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 28px;
+    color: #1890FF;
+    display: flex;
 }
 
+.likeImg {
+    padding-top: 6px;
+    margin-right: 4px;  
+}
+
+.animation {
+    padding-top: 6px;
+    margin-right: 4px;  
+    transform-origin: 50% 200%;
+    animation-name: zoomInZoomOut;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes zoomInZoomOut {
+    0% {
+      transform: scale(1, 1);
+    }
+    50% {
+      transform: scale(1.9, 1.4);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }

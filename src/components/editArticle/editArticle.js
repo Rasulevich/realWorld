@@ -14,7 +14,8 @@ const EditArticle = ({slug}) => {
     const[items, setItems] = useState([]);
     const[itemsLoaded, setItemsLoaded] = useState(false);
     const[edited, setEdited] = useState(false);
-    
+    const[buttonDisable, setButtonDisable] = useState(false);
+
     useEffect(() => {
         articles.getArticle(slug).then((res)=> {
             setItems(res.article)
@@ -34,6 +35,7 @@ const EditArticle = ({slug}) => {
     const {register, handleSubmit, errors} = useForm();
     
     const onSubmit = (data) => {
+        setButtonDisable(true)
         let allTags = [...data.newTags]
         // eslint-disable-next-line no-unused-expressions
         data.tags ? allTags = [...data.newTags, ...data.tags] : false
@@ -105,7 +107,7 @@ const EditArticle = ({slug}) => {
                     </div>
                 </div>
             </form>
-            <button type='button' className={style.sendButton} onClick={handleSubmit(onSubmit)}><span className={style.buttonText} >Send</span></button>
+            <button type='button' disabled={buttonDisable} className={style.sendButton} onClick={handleSubmit(onSubmit)}><span className={style.buttonText} >Send</span></button>
 
         </div>
     )

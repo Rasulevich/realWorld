@@ -11,8 +11,10 @@ const Profile = ({updateUsername}) => {
 
     const {register, handleSubmit, errors} = useForm();
     const [loginned, setLogin] = useState(false);
- 
+    const[buttonDisable, setButtonDisable] = useState(false);
+
     const onSubmit = (data) => {
+        setButtonDisable(true)
         profile.editProfile(data.username, data.email, data.password, data.image).then(()=>{
             localStorage.setItem('username', data.username)
             updateUsername()
@@ -66,9 +68,8 @@ const Profile = ({updateUsername}) => {
                        type='text'
                        name='image'
                        ref={register}
-                       />
-                                   
-                <button type='submit' className={style.loginButton}><span className={style.loginText}>Save</span></button>
+                       />            
+                <button type='submit' disabled={buttonDisable} className={style.loginButton}><span className={style.loginText}>Save</span></button>
 
             </form>
         </div>

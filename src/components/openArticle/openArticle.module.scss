@@ -28,6 +28,7 @@
     font-size: 20px;
     line-height: 28px;
     color: #1890FF;
+    display: flex;
 }
 .article__content {     
     width: 682px;
@@ -56,6 +57,8 @@
 .profile__button {
     display: flex;
     margin-left: 60px;
+    outline:none;
+
 }
 
 .profile__info {
@@ -131,6 +134,8 @@
     background-color: #FFFFFF;
     height:30px;
     margin-top: 5px;
+    outline:none;
+
 }
 
 .editTag{
@@ -144,6 +149,8 @@
     margin-top: 5px;
     position: relative;
     z-index: 2;
+    outline:none;
+
 }
 
 .tagList{
@@ -189,4 +196,40 @@
     background: #FFFFFF;
     border: 0px;
     outline: none;
+    height: 28px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 28px;
+    color: #1890FF;
 }
+.spinner {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.likeImg {
+    margin-right: 4px;
+    margin-bottom: 4px;
+}
+.animation {
+    margin-right: 4px;  
+    margin-bottom: 4px;
+    transform-origin: 50% 200%;
+    animation-name: zoomInZoomOut;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes zoomInZoomOut {
+    0% {
+      transform: scale(1, 1);
+    }
+    50% {
+      transform: scale(1.9, 1.4);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }

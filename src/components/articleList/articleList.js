@@ -45,6 +45,7 @@ import style from './articleList.module.scss'
                         tagList={item.tagList}
                         slug={item.slug} 
                         favoritesCount={item.favoritesCount}
+                        favorited={item.favorited}
                         />
                 </div>
                 )
