@@ -1,3 +1,5 @@
+
+
 .main{
     width: 941px;
     height: 140px;
@@ -28,6 +30,7 @@
     line-height: 28px;
     color: #1890FF;
     display: flex;
+    cursor: pointer;
 }
 
 .article__tags {
@@ -127,6 +130,7 @@
     line-height: 28px;
     color: #1890FF;
     display: flex;
+    cursor: pointer;
 }
 
 .likeImg {
@@ -141,6 +145,7 @@
     animation-name: zoomInZoomOut;
     animation-duration: 1s;
     animation-fill-mode: both;
+    
 }
 
 @keyframes zoomInZoomOut {

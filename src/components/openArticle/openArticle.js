@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { withRouter } from 'react-router-dom';
 import {Spin } from 'antd';
@@ -8,33 +8,20 @@ import PropTypes from 'prop-types';
 import ArticleService from '../service/service';
 import Modal from '../modal/modal';
 import likeImage from '../../img/Vector.svg';
+import likedImageColored from '../../img/path4.png';
 import style from './openArticle.module.scss';
+import useFavorites from '../hooks/useFavorites';
+import useItems from '../hooks/useItems';
 
 const OpenArticle = ({slug,history}) => {
 
     const articles = new ArticleService();
+
     const checkUsername = localStorage.getItem('username');
-
-    const [items, setItems] = useState([]);
     const [deleteBtnClicked, setDeleteBtnClicked] = useState(false);
-    const [tags, setTags] = useState([]);
-    const [showButtons, setShowbuttons] = useState(false);
-    const [favoritedHook, setFavorited] = useState(items.favorited);
-    const [liked, setLiked] = useState(items.favoritesCount);
-    const [loaded, setLoaded] = useState(true);
-    const[styled, setStyled] = useState(style.likeImg);
 
-    useEffect(() => {
-        articles.getArticle(slug)
-            .then(res => {
-                if (res.article.author.username === checkUsername) {setShowbuttons(true)} 
-                setItems(res.article)
-                setTags(res.article.tagList)
-                setLoaded(false)
-                setLiked(res.article.favoritesCount)
-            }) 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[slug ])
+    const {favoritesFromServer,likeImg, likeButton, styled} = useFavorites(0.5,slug, articles, style);
+    const {items,tags,liked, loaded,showButtons} = useItems(articles,checkUsername, slug, favoritesFromServer);
 
     const deleteArticleBtn = () => {
         setDeleteBtnClicked(true)
@@ -54,27 +41,6 @@ const OpenArticle = ({slug,history}) => {
         return "https://static.productionready.io/images/smiley-cyrus.jpg";
     } 
 
-    const addLike = () => {
-        setStyled(style.animation)
-        if (!favoritedHook) {
-            articles.postLike(slug).then((res)=> {
-                const {article} = res
-                setLiked(article.favoritesCount)
-                setStyled(style.likeImg)
-            } )
-            setFavorited(true) 
-        }
-
-        if(favoritedHook) {
-            articles.deleteLike(slug).then((res)=> {
-                const {article} = res
-                setLiked(article.favoritesCount)
-                setStyled(style.likeImg)
-            } )
-            setFavorited(false) 
-        }     
-    }
-    
     if (loaded) {return <div className={style.spinner}>  <Spin size='large'/> </div>}  
 
     return (
@@ -82,8 +48,8 @@ const OpenArticle = ({slug,history}) => {
            <div className={style.main}>
              <div className={style.article}>
                 <div className={style.article__header}> {items.title}
-                    <button type='submit' className={style.likeButton} onClick={addLike}>
-                        <img src={likeImage} className={styled} alt='like'/> {liked} 
+                    <button type='submit' className={style.likeButton} onClick={likeButton}>
+                        <img src={likeImg ? likedImageColored : likeImage} className={styled} alt='like'/> {liked} 
                     </button>
                 </div>
                 <div className={style.tagList}>

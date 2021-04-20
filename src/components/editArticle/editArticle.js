@@ -1,16 +1,18 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useEffect, useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {useForm} from 'react-hook-form';
 import {Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ArticleService from '../service/service';
 import style from './editArticle.module.scss';
 
+
 const EditArticle = ({slug}) => {
 
     const articles = new ArticleService();
 
     const[addTagInput, setAddTagInput] = useState(1);
+
     const[items, setItems] = useState([]);
     const[itemsLoaded, setItemsLoaded] = useState(false);
     const[edited, setEdited] = useState(false);
@@ -43,6 +45,7 @@ const EditArticle = ({slug}) => {
     } 
 
     const tags = items.tagList
+
 
     if (edited) { return  <Redirect to='/articles'/> }
 

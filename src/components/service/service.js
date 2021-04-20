@@ -1,4 +1,3 @@
-  
 import ApiService from './apiService';
 
 export default class ArticleService {
@@ -104,5 +103,4 @@ export default class ArticleService {
       const method = 'DELETE';
       await fetch(`${this.baseUrl}articles/${slug}/favorite`, this.apiService.postData(method,null,this.token));    
     }   
-
 }
